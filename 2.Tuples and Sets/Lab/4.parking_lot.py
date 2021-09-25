@@ -8,7 +8,6 @@ for _ in range(count):
         cars.discard(car)
 
 if cars:
-    for car in cars:
-        print(car)
+    [print(car) for car in cars]
 else:
     print("Parking Lot is Empty")
