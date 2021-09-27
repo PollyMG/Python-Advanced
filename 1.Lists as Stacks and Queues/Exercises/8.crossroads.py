@@ -1,38 +1,31 @@
 from collections import deque
-green_light_seconds = int(input())
-free_window_seconds = int(input())
+
+green_light = int(input())
+free_window = int(input())
+
 cars = deque()
-cars_counter = 0
+passed_cars = 0
+
 crashed = False
-
-command = input()
-
-while not command == "END":
+while not crashed:
+    command = input()
+    if command == "END":
+        break
     if command == "green":
-        if cars:
-            current_car = cars.popleft()
-            seconds_left = green_light_seconds - len(current_car)
-            while seconds_left > 0:
-                cars_counter += 1
-                if cars:
-                    current_car = cars.popleft()
-                    seconds_left -= len(current_car)
-                else:
-                    break
-            if seconds_left == 0:
-                cars_counter += 1
-            if free_window_seconds >= abs(seconds_left):
-                if seconds_left < 0:
-                    cars_counter += 1
+        current_green_light = green_light
+        while cars and current_green_light > 0:
+            car = cars.popleft()
+            if current_green_light >= len(car) or \
+                    current_green_light + free_window >= len(car):
+                passed_cars += 1
+                current_green_light -= len(car)
             else:
-                car_was_hit_at = free_window_seconds + seconds_left
                 print("A crash happened!")
-                print(f"{current_car} was hit at {current_car[car_was_hit_at]}.")
+                print(f'{car} was hit at {car[current_green_light + free_window]}.')
                 crashed = True
                 break
     else:
         cars.append(command)
-    command = input()
 if not crashed:
     print("Everyone is safe.")
-    print(f"{cars_counter} total cars passed the crossroads.")
+    print(f"{passed_cars} total cars passed the crossroads.")
