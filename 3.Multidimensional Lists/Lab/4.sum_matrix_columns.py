@@ -14,5 +14,5 @@ for row in range(rows):
     for col in range(columns):
         value = matrix[row][col]
         columns_sum[col] += value
-for el in columns_sum:
-    print(el)
+[print(el) for el in columns_sum]
+

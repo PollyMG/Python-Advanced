@@ -6,11 +6,17 @@ for row in range(n):
 
 symbol = input()
 position = None
+# for row in range(n):
+#     for col in range(n):
+#         if matrix[row][col] == symbol:
+#             position = (row, col)
+#             break
+#     if position:
+#         break
+# print(position if position else f"{symbol} does not occur in the matrix")
 for row in range(n):
-    for col in range(n):
-        if matrix[row][col] == symbol:
-            position = (row, col)
-            break
-    if position:
+    if symbol in matrix[row]:
+        col = matrix[row].index(symbol)
+        position = (row, col)
         break
 print(position if position else f"{symbol} does not occur in the matrix")
