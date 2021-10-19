@@ -1,4 +1,5 @@
 from collections import deque
+
 arithmetic_expressions = {
     '+': lambda a, b: a + b,
     '-': lambda a, b: a - b,
